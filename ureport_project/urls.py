@@ -13,7 +13,7 @@ from contact.urls import urlpatterns as contact_urls
 #from tracking.urls import urlpatterns as tracking_urls
 from generic.urls import urlpatterns as generic_urls
 from ussd.urls import urlpatterns as ussd_urls
-from message_classifier.urls import urlpatterns as class_urls
+#from message_classifier.urls import urlpatterns as class_urls
 from rapidsms.backends.kannel.views import KannelBackendView
 #from andrelay.views import CustomHttpBackendView
 
@@ -52,9 +52,12 @@ urlpatterns = patterns('',
 #    url('^accounts/logout', 'rapidsms.views.logout'),
     url('^accounts/change_password', login_required(password_change), {'template_name':'ureport/change_password.html', 'post_change_redirect':'/'}),
     (r'^polls/', include('poll.urls')),
+    
+    (r'^ureport/', include('ureport.urls')),
+    
     (r'^selectable/', include('selectable.urls')),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +\
-    router_urls + ureport_urls + contact_urls + generic_urls + ussd_urls + class_urls 
+    router_urls + ureport_urls + contact_urls + generic_urls + ussd_urls
 
 #In development, static files should be served from app static directories
 urlpatterns += staticfiles_urlpatterns()

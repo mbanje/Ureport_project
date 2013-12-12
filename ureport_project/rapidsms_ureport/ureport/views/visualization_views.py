@@ -56,6 +56,16 @@ def best_visualization(request, poll_id=None):
                               context_instance=RequestContext(request))
 
 
+
+
+
+
+
+
+	
+
+
+
 @login_required
 def add_drop_word(request, tag_name=None, poll_pk=None):
     IgnoredTags.objects.create(name=tag_name,
@@ -100,6 +110,16 @@ def tag_cloud(request, pks):
         'poll_qn': poll_qn[0],
         'poll_id': pks,
         }, context_instance=RequestContext(request))
+
+
+
+@transaction.autocommit
+def histogram2_0(request, pks=None):
+	p= retrieve_poll(request, pks)
+	return render_to_response('ureport/partials/viz/histogram.html',{'polls': p},context_instance=RequestContext(request))
+
+
+
 
 @transaction.autocommit
 def histogram(request, pks=None):
@@ -166,6 +186,86 @@ def histogram(request, pks=None):
     return render_to_response('ureport/partials/viz/histogram.html',
                               {'polls': all_polls},
                               context_instance=RequestContext(request))
+                  
+
+
+
+
+
+@transaction.autocommit
+def histogram2(request, pks=None):
+    """
+         view for numeric polls
+    """
+
+    all_polls = Poll.objects.filter(type=u'n')
+    pks = (pks if pks != None else request.GET.get('pks', None))
+    if pks:
+        items = 6
+        polls = retrieve_poll(request, pks)
+        responses = Response.objects.filter(poll__in=polls)
+        pks = polls.values_list('pk', flat=True)
+        responses = Response.objects.filter(poll__in=polls,
+                poll__type=u'n')
+        plottable_data = {}
+        if responses:
+            poll_results = {}
+            poll_qns = ['Qn:' + poll.question + '<br>' for poll in
+                        Poll.objects.filter(pk__in=pks)]
+
+            total_responses = responses.count()
+            vals_list = \
+                Value.objects.filter(entity_id__in=responses).values_list('value_float'
+                    , flat=True)
+            vals_list = sorted(vals_list)
+            max = int(vals_list[-1])
+            min = int(vals_list[0])
+            num_list = range(min, max)
+            increment = int(max / items)
+            bounds = num_list[::increment]
+            ranges_list = [str(a) + '-' + str(a + increment) for a in
+                           bounds if a < max]
+            poll_results['categories'] = ranges_list
+            poll_results['title'] = poll_qns
+
+            for response in responses:
+                name = response.poll.name
+                poll_results.setdefault(name, {})
+                poll_results[name].setdefault('data', {})
+                if len(response.eav_values.all()) > 0:
+                    value = \
+                        int(response.eav_values.all()[0].value_float)
+                pos = bisect.bisect_right(bounds, value) - 1
+                r = ranges_list[pos]
+                poll_results[name]['data'].setdefault(r, 0)
+                poll_results[name]['data'][r] += 1
+
+            data = []
+            for key in poll_results.keys():
+                if key not in ['categories', 'title']:
+                    d = {}
+                    d['name'] = key
+                    d['data'] = poll_results[key]['data'].values()
+                    data.append(d)
+            plottable_data['data'] = data
+            plottable_data['title'] = poll_qns
+            plottable_data['categories'] = ranges_list
+            plottable_data['mean'] = sum(vals_list) / len(vals_list)
+            plottable_data['median'] = vals_list[len(vals_list) / 2]
+        return HttpResponse(mark_safe(simplejson.dumps(plottable_data)))
+
+    return render_to_response('ureport/partials/viz/histogram.html',
+                              {'polls': all_polls},
+                              context_instance=RequestContext(request))
+
+
+
+ 
+ 
+
+
+                            
+                              
 
 @transaction.autocommit
 def show_timeseries(request, pks):

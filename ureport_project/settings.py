@@ -36,21 +36,23 @@ for path in paths:
     else:
         sys.path.append(os.path.join(filedir, path))
         
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ADMIN_UNREGISTER= True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
+USSD_ENABLED=False
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'ureport_project.db',
-        'USER': '',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Ureport_project_db',
+        'USER': 'helpdeskadmin',
+        'PASSWORD': 'Kigabo47**',
         'HOST': '',
         'PORT': '',
     }
@@ -263,8 +265,12 @@ INSTALLED_APPS = (
 #    'rapidsms.locations': 'ureport.migrations',
 #    'rapidsms.locations.nested': 'ureport.migrations',
 #}
-
+SOUTH_TESTS_MIGRATE = False
 RAPIDSMS_ROUTER = "rapidsms.router.db.DatabaseRouter"
+
+
+   
+
 
 SMS_APPS = [
     "maintenance",

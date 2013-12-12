@@ -8,6 +8,9 @@
     <title>Ureport - {% block page_title %}Voice Matters{% endblock %}</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
+
+
+
     {% block stylesheets %}
     	<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}rapidsms/stylesheets/splits.css" />
 	    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}rapidsms/stylesheets/modules.css" />
@@ -19,6 +22,11 @@
 	    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" />
         <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}ureport/stylesheets/ureport_home.css?11">
     {% endblock %}
+   
+   
+   
+   
+    
     <script type="text/javascript" src="{{ STATIC_URL }}ureport/javascripts/jquery.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}ureport/javascripts/ureport.min.js?41"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}ureport/javascripts/jquery-ui.js"></script>
@@ -37,8 +45,20 @@
               // })();
 
             </script>
+            
+            
+       
+       
+            
+            
 {% block top_js %}
+
+
 {% endblock %}
+
+
+
+
 
 </head>
 <body>
@@ -62,10 +82,30 @@
         </div>
         <div class="content">
         	<!--  MAIN CONTENT GOES HERE -->
+        	
+        	
+        	
+        	
+        	
+        	
             {% block content %}
+            
             {% endblock %}
+            
+            
+     
+     
+            
         </div>
         <div class="sidebar">
+			
+			
+			
+			
+			
+			
+			
+			
             {% block sidecontent %}
             <div class="intro">
                Ureport est une plate-forme de SMS gratuits qui permet aux citoyens 
@@ -94,6 +134,13 @@
                     </div>
                 {% endif %}
             {% endblock %}
+            
+            
+            
+            
+            
+            
+            
             
             <div id="say">
             	<div class="say_header">
@@ -200,7 +247,7 @@
 	                   <li><a href="{% url "messagelog" %}">Message Log</a></li>
 	                   <li><a href="{% url "ureport-contact" %}">uReporters</a></li>
 	                   <li><a href="{% url "flaggedmessages" %}">Flagged Messages</a></li>
-                        <li><a href="{% url "classifier" %}">Message Classification</a></li>
+                       <li><a href="#">Message Classification</a></li>
                     <li><a href="{% url "alerts" %}">Real Time</a></li>
 	                {% else %}
 	                   <li><a href="/accounts/login">LOGIN</a></li>
@@ -211,7 +258,16 @@
 	        </div>
 	    </div>
         <script type="text/javascript" src="{{ STATIC_URL }}rapidsms/javascripts/collapse.js"></script>
+        
+        
+        
+        
 		{% block javascripts %}
+		
 		{% endblock %}
+		
+		
+		
+		
 </body>
 </html>

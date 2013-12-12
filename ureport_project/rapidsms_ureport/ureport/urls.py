@@ -10,6 +10,9 @@ from tastypie.api import Api
 from .api import PollResponseResource, PollResource, MessageResource, ContactResource, ResponseResource
 from ureport.views.excel_reports_views import generate_poll_dump_report, generate_per_district_report
 
+#
+from poll import views
+
 message_resource = MessageResource()
 
 v1_api = Api(api_name='v1')
@@ -22,6 +25,9 @@ v1_api.register(ResponseResource())
 urlpatterns = patterns('',
                        # dashboard view for viewing all poll reports in one place
                        url(r'^dashboard/$', poll_dashboard, name="poll_dashboard"),
+
+					  url(r'^visualizehisto/(?P<pks>\d+)/$', histogram2_0, name="histogram"),
+						
 
                        # ureporters (contact management views)
                        url(r'^reporter/$', ureporters, name="ureport-contact"),
