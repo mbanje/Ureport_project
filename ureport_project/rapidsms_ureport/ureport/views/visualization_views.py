@@ -119,6 +119,13 @@ def histogram2_0(request, pks=None):
 	return render_to_response('ureport/partials/viz/histogram.html',{'polls': p},context_instance=RequestContext(request))
 
 
+def histogram3(request, pks=None):
+	p= retrieve_poll(request, pks)
+	return render_to_response('ureport/partials/viz/histogram.html',{'polls': p},context_instance=RequestContext(request))
+
+def number_details(req, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    return HttpResponse(mark_safe(simplejson.dumps(list(poll.get_numeric_detailed_data()))))
 
 
 @transaction.autocommit

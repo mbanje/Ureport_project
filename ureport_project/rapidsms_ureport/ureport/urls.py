@@ -11,7 +11,7 @@ from .api import PollResponseResource, PollResource, MessageResource, ContactRes
 from ureport.views.excel_reports_views import generate_poll_dump_report, generate_per_district_report
 
 #
-from poll import views
+from poll.views import *
 
 message_resource = MessageResource()
 
@@ -26,8 +26,11 @@ urlpatterns = patterns('',
                        # dashboard view for viewing all poll reports in one place
                        url(r'^dashboard/$', poll_dashboard, name="poll_dashboard"),
 
-					  url(r'^visualizehisto/(?P<pks>\d+)/$', histogram2_0, name="histogram"),
-						
+					
+
+					  url(r'^visualizehisto/(?P<pks>\d+)/$', histogram3, name="histogram"),
+					  
+					  url(r'^visualizehistogra/(?P<poll_id>\d+)/$', number_details, name="number_details"),
 
                        # ureporters (contact management views)
                        url(r'^reporter/$', ureporters, name="ureport-contact"),

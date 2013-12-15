@@ -169,6 +169,21 @@ function load_histogram(poll_id, element_id, url) {
 }
 
 
+
+
+
+function load_histogram2(poll_id, element_id, url=number_details) {
+	print "L'URL QUE J'AI EST ",url
+    remove_selection();
+    $('#' + element_id).show();
+    $('img.bar'+element_id).addClass('selected');
+    var id_list = "";
+c
+}
+
+
+
+
 var pie_opts = {
     chart: {renderTo: 'pie',margin: [5,5,5,5]},
     title: {text: ''},
