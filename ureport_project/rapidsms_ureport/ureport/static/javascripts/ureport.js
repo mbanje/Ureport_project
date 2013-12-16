@@ -178,7 +178,6 @@ function load_histogram2(poll_id, element_id, url=number_details) {
     $('#' + element_id).show();
     $('img.bar'+element_id).addClass('selected');
     var id_list = "";
-c
 }
 
 
