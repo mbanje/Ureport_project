@@ -48,27 +48,20 @@
 	
 	<body>
 		
-		<ul>  
-			<li>30:2007</li>
-			<li>40:2008</li>
-			<li>80:2009</li>
-			<li>14:2010</li>
-		</ul>
-		
 		<div id="graph">
 			200<br /> <br /> <br /> 150 <br /> <br /> <br /> 100 <br /> <br /> <br /> 50
 			<ul>
-				
+
 				<li>30:2006</li>
 				<li>80</li>
 				<li>120</li>
 				<li>20</li>
 				<li>28</li>
-		
+
 			</ul>
 		</div>
 
-		
+
 		<div id="labels">
 			
 			Années
@@ -85,20 +78,22 @@
     var labels = document.getElementById("labels");
     var dnl = container.getElementsByTagName("li");
     for(var i = 0; i < dnl.length; i++)
-    {alert("debut  de for");
+    {//alert("debut  de for");
         var item = dnl.item(i);
         var value = item.innerHTML;
         var content = value.split(":");
         value = content[0];
         item.style.height=value + "px";
         item.style.top=(199 - value) + "px";
-        item.style.left = (i * 50 + 20) + "px";
+        item.style.left = (i * 40) + "px";
         
-        item.style.height = value + "px";
+        //item.style.height = value + "px";
         item.innerHTML = value;
         item.style.visibility="visible";	
-        left = new String(i * 50 + 58) + "px";           
-        alert("fin  de for");
+        //left = new String(i * 50 + 58) + "px";  
+        
+        labels.innerHTML = labels.innerHTML+"         "+value;         
+       // alert("fin  de for");
     }	
 	}
 
