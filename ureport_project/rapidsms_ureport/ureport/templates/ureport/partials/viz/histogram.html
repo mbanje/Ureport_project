@@ -38,6 +38,7 @@
 		
 		.s
 		{
+		position:absolute;		
 		width:40px;	
 		border:1px solid black;
 		background:red;
@@ -132,8 +133,9 @@
         var value_abs= content[0];
         var absci = document.createElement('span');
         absci.setAttribute('class', 's');
-        var lefte = (i * 40) + "px";
-        absci.setAttribute('left', ''+lefte+'');
+		absci.style.left=''+(i * 40)+'px';
+		
+         
 		absci.innerHTML = value_abs;
         compo_des_abscisses.appendChild(absci);
 
