@@ -65,7 +65,11 @@
 	
 	
 	<body>
-		
+		<span>
+			NOMBRE <br>
+			DE<br>
+			VOTANTS
+		</span>
 		<div id="graph">
 			<ul>
 
@@ -79,17 +83,18 @@
 		</div>
 		
 		
-		<div id="abscisses">
+		<span id="abscisses">
 		
 		
 		
-		</div>
-		
-		<div id="labels">
+		</span>
+		<br>
+		<br>
+		<span id="labels">
 			
-			Années
+			Reponses donnees
 			
-		</div>
+		</span>
 		
 		
 		<script type="text/javascript">
@@ -99,8 +104,9 @@
 	{alert("debut");
 	
     var container = document.getElementById("graph");
+    var dnl = container.getElementsByTagName("li");    
     var labels = document.getElementById("labels");
-    var dnl = container.getElementsByTagName("li");
+
     var compo_des_abscisses= document.getElementById("abscisses");
     var abscisses='';
     var absci='';
@@ -108,46 +114,34 @@
    
 
     for(var i = 0; i < dnl.length; i++)
-    {//alert("debut  de for");
+    {
         var item = dnl.item(i);
-        //var item1 = item.cloneNode(true);
+       
         
         var value = item.innerHTML;
         var content = value.split(":");
         
         
         value = content[1];
-        //absci = '<span>'+content[0]+'</span>';
+  
 
         item.style.height=value + "px";
         item.style.top=(199 - value) + "px";
         item.style.left = (i * 40) + "px";
-        //item.style.height = value + "px";
+
         item.innerHTML = value;
         item.style.visibility="visible";	
         compo_des_abscisses.style.visibility="visible";
-        //abscisses +=absci;
-        //var absci= document.createTextNode(""+content[0]+"");
+
         
         
         var value_abs= content[0];
         var absci = document.createElement('span');
         absci.setAttribute('class', 's');
 		absci.style.left=''+(i * 40)+'px';
-		
-         
-		absci.innerHTML = value_abs;
-        compo_des_abscisses.appendChild(absci);
 
-        //left = new String(i * 50 + 58) + "px";  
-        
-        //item1.style.height=30 + "px";
-        //item1.style.top=199 + "px";
-        //item1.style.left = (i * 40) + "px";
-        //item1.innerHTML = indi;
-        //item1.style.visibility="visible";	
-        //compo_des_abscisses.innerHTML=abscisses;
-        //labels.innerHTML = labels.innerHTML+"<span style='width:40px>2</span>";         
+		absci.innerHTML = value_abs;
+        compo_des_abscisses.appendChild(absci);        
         alert(absci);
     }  
 	}
